@@ -40,12 +40,35 @@
             margin: 100px auto;
             background-color: #4f4f4f;
         }
+        .container {
+            width: 50%; /* Set the width of the form */
+            padding: 20px; /* Add padding to the form */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8); /* Add a semi-transparent background to the form */
+        }
         @media (max-width: 768px) {
             .card img {
                 height: 100px;
             }
             body {
                 background-size: cover; /* Ensure the background image fits the screen on mobile devices */
+            }
+            .container {
+                width: 90%; /* Increase the width of the form to fit the screen on mobile devices */
+                padding: 20px; /* Add padding to the form */
+                background-color: rgba(0, 0, 0, 0.8); /* Add a semi-transparent background to the form */
+            }
+            .form-group {
+                margin-bottom: 1.5rem; /* Add margin to form groups */
+            }
+        }
+        @media (min-width: 769px) {
+            .container {
+                width: 50%; /* Set the width of the form for larger devices */
+                padding: 20px; /* Add padding to the form */
             }
         }
         #coached-by-wh {
@@ -56,13 +79,6 @@
             font-size: 14px;
             color: #ffffff;
             background-color: rgba(0, 0, 0, 0.5);
-        }
-        .container {
-            width: 50%; /* Reduce the width of the form */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -110,7 +126,7 @@
     <script>
         let mealPlanDatabase = [
             {
-                name: "Meal 1",
+                name: "Breakfast",
                 dish: "Oats with Protein powder and Peanut butter",
                 calories: 400,
                 protein: 20,
@@ -120,7 +136,7 @@
                 dietType: "veg"
             },
             {
-                name: "Meal 2",
+                name: "Lunch",
                 dish: "Tofu with White rice and Veggies",
                 calories: 500,
                 protein: 25,
@@ -130,7 +146,7 @@
                 dietType: "veg"
             },
             {
-                name: "Meal 3",
+                name: "Dinner",
                 dish: "Tofu with White rice and Veggies",
                 calories: 500,
                 protein: 25,
@@ -140,7 +156,7 @@
                 dietType: "veg"
             },
             {
-                name: "Meal 4",
+                name: "Snacks",
                 dish: "Yogurt with Protein powder and Berries",
                 calories: 300,
                 protein: 20,
@@ -150,7 +166,7 @@
                 dietType: "veg"
             },
             {
-                name: "Meal 1",
+                name: "Breakfast",
                 dish: "Eggs with Bread",
                 calories: 400,
                 protein: 25,
@@ -160,7 +176,7 @@
                 dietType: "non-veg"
             },
             {
-                name: "Meal 2",
+                name: "Lunch",
                 dish: "Chicken breast with White rice, Ghee/butter and Veggies",
                 calories: 600,
                 protein: 40,
@@ -170,7 +186,7 @@
                 dietType: "non-veg"
             },
             {
-                name: "Meal 3",
+                name: "Dinner",
                 dish: "Chicken breast with White rice, Ghee/butter and Veggies",
                 calories: 600,
                 protein: 40,
@@ -180,7 +196,7 @@
                 dietType: "non-veg"
             },
             {
-                name: "Meal 4",
+                name: "Snacks",
                 dish: "Yogurt with Protein powder and Berries",
                 calories: 300,
                 protein: 20,
@@ -211,10 +227,10 @@
             let mealCalories = totalCalories / 4;
 
             meals.forEach(meal => {
-                let servings = (mealCalories / meal.calories).toFixed(2);
-                let protein = (meal.protein * servings).toFixed(2);
-                let fat = (meal.fat * servings).toFixed(2);
-                let carbs = (meal.carbs * servings).toFixed(2);
+                let quantity = ((mealCalories / meal.calories) * 100).toFixed(2);
+                let protein = (meal.protein * (quantity / 100)).toFixed(2);
+                let fat = (meal.fat * (quantity / 100)).toFixed(2);
+                let carbs = (meal.carbs * (quantity / 100)).toFixed(2);
 
                 let card = document.createElement("div");
                 card.className = "col-lg-12 col-md-6 col-sm-12 mb-4";
@@ -229,7 +245,7 @@
                             <p class="card-text">Protein: ${protein}g</p>
                             <p class="card-text">Carbs: ${carbs}g</p>
                             <p class="card-text">Fat: ${fat}g</p>
-                            <p class="card-text">Servings: ${servings}</p>
+                            <p class="card-text">Quantity: ${quantity} g</p>
                         </div>
                     </div>
                 `;
