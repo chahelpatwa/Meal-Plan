@@ -57,11 +57,20 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
         .container {
-            width: 50%; /* Reduce the width of the form */
+            width: 50%; /* Default width for larger devices */
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%; /* Adjust width for smaller devices */
+            }
+        }
+        .quantity-text {
+            font-size: 1.2em; /* Slightly increase the text size */
+            font-weight: bold; /* Make it bold for emphasis */
         }
     </style>
 </head>
@@ -116,7 +125,8 @@
                 carbs: 50,
                 fat: 15,
                 image: "oats.png",
-                dietType: "veg"
+                dietType: "veg",
+                quantityDetails: "78g oats (raw), 47g protein powder, 31g peanut butter"
             },
             {
                 name: "Meal 2",
@@ -126,7 +136,8 @@
                 carbs: 60,
                 fat: 20,
                 image: "tofurice.png",
-                dietType: "veg"
+                dietType: "veg",
+                quantityDetails: "125g tofu (cooked), 188g rice (cooked), 63g veggies (cooked)"
             },
             {
                 name: "Meal 3",
@@ -136,7 +147,8 @@
                 carbs: 60,
                 fat: 20,
                 image: "tofurice.png",
-                dietType: "veg"
+                dietType: "veg",
+                quantityDetails: "125g tofu (cooked), 188g rice (cooked), 63g veggies (cooked)"
             },
             {
                 name: "Meal 4",
@@ -146,7 +158,8 @@
                 carbs: 30,
                 fat: 10,
                 image: "yogurtberries.jpeg",
-                dietType: "veg"
+                dietType: "veg",
+                quantityDetails: "200g yogurt, 47g protein powder, 50g berries"
             },
             {
                 name: "Meal 1",
@@ -156,7 +169,8 @@
                 carbs: 30,
                 fat: 15,
                 image: "eggsbread.jpeg",
-                dietType: "non-veg"
+                dietType: "non-veg",
+                quantityDetails: "3 eggs (cooked), 2 slices bread (50g each)"
             },
             {
                 name: "Meal 2",
@@ -166,7 +180,8 @@
                 carbs: 50,
                 fat: 20,
                 image: "chickenbreast.jpeg",
-                dietType: "non-veg"
+                dietType: "non-veg",
+                quantityDetails: "150g chicken breast (cooked), 188g rice (cooked), 63g veggies (cooked), 10g ghee/butter"
             },
             {
                 name: "Meal 3",
@@ -176,7 +191,8 @@
                 carbs: 50,
                 fat: 20,
                 image: "chickenbreast.jpeg",
-                dietType: "non-veg"
+                dietType: "non-veg",
+                quantityDetails: "150g chicken breast (cooked), 188g rice (cooked), 63g veggies (cooked), 10g ghee/butter"
             },
             {
                 name: "Meal 4",
@@ -186,7 +202,8 @@
                 carbs: 30,
                 fat: 10,
                 image: "yogurtberries.jpeg",
-                dietType: "non-veg"
+                dietType: "non-veg",
+                quantityDetails: "200g yogurt, 47g protein powder, 50g berries"
             }
         ];
 
@@ -212,7 +229,6 @@
             let mealCalories = totalCalories / 4;
 
             meals.forEach(meal => {
-                let quantity = ((mealCalories / meal.calories) * 100).toFixed(2);
                 let protein = (mealProtein).toFixed(2);
                 let fat = (mealFat).toFixed(2);
                 let carbs = ((mealCalories - (protein * 4 + fat * 9)) / 4).toFixed(2);
@@ -230,7 +246,7 @@
                             <p class="card-text">Protein: ${protein}g</p>
                             <p class="card-text">Carbs: ${carbs}g</p>
                             <p class="card-text">Fat: ${fat}g</p>
-                            <p class="card-text">Quantity: ${quantity} g</p>
+                            <p class="card-text quantity-text">Quantity: ${meal.quantityDetails}</p>
                         </div>
                     </div>
                 `;
